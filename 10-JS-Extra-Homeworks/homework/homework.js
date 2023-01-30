@@ -1,5 +1,8 @@
 // No cambies los nombres de las funciones.
 
+const { arrayReplaceAt } = require("markdown-it/lib/common/utils");
+const { filter } = require("../../07-JS-VI/homework/homework");
+
 function deObjetoAmatriz(objeto){
   // Escribe una función que convierta un objeto en una matriz, donde cada elemento representa 
   // un par clave-valor en forma de matriz.
@@ -10,7 +13,9 @@ function deObjetoAmatriz(objeto){
       C: 3
     }) ➞ [["D", 1], ["B", 2], ["C", 3]]*/
   //Escribe tu código aquí
-}
+  const valores = Object.entries(objeto); 
+  return valores;
+  }
 
 
 function numberOfCharacters(string) {
@@ -18,6 +23,15 @@ function numberOfCharacters(string) {
   //en formato par clave-valor.
   //Ej: Recibe ---> "adsjfdsfsfjsdjfhacabcsbajda" || Devuelve ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 } 
   //Escribe tu código aquí
+  let suma = 0;
+  const objeto = {};
+  //Array.from convierte a string en un array 
+  const arr = Array.from(string);
+  arr.forEach(t => {
+    suma = arr.filter(c => c === t).length //filtra el array con la letra seleccionada y cuenta la longitud del arreglo filtrado
+    objeto[t] = suma;  
+  });  
+  return objeto;
 }
 
 
@@ -26,6 +40,17 @@ function capToFront(s) {
   //al principio de la palabra.
   //Ejemplo: soyHENRY -> HENRYsoy
   //Escribe tu código aquí
+  const arr = Array.from(s);        //Convierte string en array para poder iterarlo
+  const mayusArr = [];
+  const minusArr = [];
+  arr.forEach(t => {
+    if (t === t.toUpperCase()) {        //Si es mayúscula agregalo a un array para las mayúsculas 
+      mayusArr.push(t);         
+    }else{                              //Si es minúscula agregalo a un array para las minúsculas
+      minusArr.push(t);         
+    }
+  });
+  return(mayusArr.join('') + minusArr.join('')); //Convierte arrays en strings y mayúsculas con minúsculas en un sólo string
 }
 
 
@@ -35,6 +60,19 @@ function asAmirror(str) {
   //pero con cada una de sus palabras invertidas, como si fuera un espejo.
   //Ej: Recibe ---> "The Henry Challenge is close!" || Devuelve ---> "ehT yrneH egnellahC si !esolc"
   //Escribe tu código aquí
+  nuevoArr = [];
+  arrWord = [];
+  arr = Array.from(str);
+  arr.forEach(t => {
+    if (t == " ") {
+      arrWord.forEach(i => {nuevoArr.push(i)}); 
+      arrWord = [];
+      nuevoArr.push(t);
+    }else{
+      arrWord.unshift(t);
+    }
+  });
+  return nuevoArr.join('');
 } 
 
 
